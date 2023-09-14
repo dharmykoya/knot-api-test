@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\CardSwitcherTask;
-use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class CardSwitcherService {
 
@@ -42,5 +42,20 @@ class CardSwitcherService {
         ]);
 
         return ['status' => true, 'data' => $task];
+    }
+
+    public function latestTasks($request) {
+        $userId = auth()->user()->id; // Assuming you are using Passport for authentication
+        $perPage = $request->per_page ?? 10;
+
+        return DB::table('card_switcher_tasks')
+            ->join('merchants', 'card_switcher_tasks.merchant_id', '=', 'merchants.id')
+            ->join('cards', 'card_switcher_tasks.card_id', '=', 'cards.id')
+            ->select('merchants.name as merchant_name', 'cards.card_number', 'card_switcher_tasks.created_at')
+            ->where('card_switcher_tasks.user_id', $userId)
+            ->where('card_switcher_tasks.status', 'finished')
+            ->orderBy('card_switcher_tasks.created_at', 'desc')
+            ->distinct('merchants.id')
+            ->paginate($perPage);
     }
 }

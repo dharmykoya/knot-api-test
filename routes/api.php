@@ -30,6 +30,9 @@ Route::prefix('v1')->group(function () {
 
 
     Route::middleware('auth:api')->group(function () {
+        Route::prefix('users')->group(function () {
+            Route::get('tasks', [CardSwitcherController::class, 'latestFinishedTasks']);
+        });
         Route::prefix('cards')->group(function () {
             Route::post('', [CardController::class, 'store']);
         });
