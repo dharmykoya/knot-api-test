@@ -7,6 +7,61 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+# KnotAPI test
+
+## Features
+- User can sign up.
+- User can login.
+- Create card for user.
+- Get all merchants
+- Create Card switcher task
+- Update task status to finished
+- Update task status to failed
+
+## Installation
+1. Ensure you have Php and composer installed
+
+2. Clone this repo
+```bash
+$ git clone git@github.com:dharmykoya/knot-api-test.git
+```
+3. Install Dependencies
+```bash
+composer install
+```
+
+4. Run migration
+```bash
+php artisan migrate
+```
+
+5. Run seed
+```bash
+php artisan db:seed --class=MerchantSeeder
+```
+6. Install passport
+```bash
+php artisan passport:install
+```
+
+7. Install passport
+```bash
+php artisan passport:keys
+```
+
+8. Create .env file
+```bash
+touch .env
+```
+
+9. Start server
+```bash
+php artisan serve
+```
+
+## API Documentation
+[documentation](https://documenter.getpostman.com/view/7508184/2s9YC5wrqW)
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
