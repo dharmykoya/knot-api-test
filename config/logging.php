@@ -57,14 +57,20 @@ return [
             'channels' => ['single'],
             'ignore_exceptions' => false,
         ],
-
-        'single' => [
-            'driver' => 'single',
-            'path' => storage_path('logs/laravel.log'),
-            'level' => env('LOG_LEVEL', 'debug'),
-            'replace_placeholders' => true,
+        'stack' => [
+            'driver' => 'stack',
+            'channels' => ['single'],
         ],
-
+        'single' => [
+            'driver' => 'errorlog',
+            'level' => 'debug',
+        ],
+//        'single' => [
+//            'driver' => 'single',
+//            'path' => storage_path('logs/laravel.log'),
+//            'level' => env('LOG_LEVEL', 'debug'),
+//            'replace_placeholders' => true,
+//        ],
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
