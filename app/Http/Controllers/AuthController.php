@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterUserRequest;
 use App\Services\AuthService;
 use Illuminate\Http\Request;
@@ -27,5 +28,23 @@ class AuthController extends Controller
         $newUser['token'] = $newUser->createToken('API Token')->accessToken;
 
         return  response()->created($newUser);
+    }
+
+    public function login(LoginRequest $request)
+    {
+        try {
+            $data = $request->validated();
+
+            if (!auth()->attempt($data)) {
+                return response()->badRequest('Incorrect details, please try again');
+            }
+
+            $token = auth()->user()->createToken('API Token')->accessToken;
+            $user =  auth()->user();
+
+            return response()->ok(['user'=> $user, "token"=>$token]);
+        } catch (\Exception $exception) {
+            return response()->internalServerError('Something went wrong ,please contact support');
+        }
     }
 }
