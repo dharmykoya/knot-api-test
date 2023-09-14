@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\MerchantController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,10 +27,15 @@ Route::prefix('v1')->group(function () {
         Route::post('login', [AuthController::class, 'login']);
     });
 
-    Route::prefix('cards')->group(function () {
-        Route::middleware('auth:api')->group(function () {
+
+    Route::middleware('auth:api')->group(function () {
+        Route::prefix('cards')->group(function () {
             Route::post('', [CardController::class, 'store']);
         });
+    });
+
+    Route::prefix('merchants')->group(function () {
+        Route::get('', [MerchantController::class, 'index']);
     });
 });
 
