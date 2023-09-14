@@ -15,6 +15,13 @@ class CardSwitcherController extends Controller
         $this->cardSwitcherService = $cardSwitcherService;
     }
 
+    public function latestFinishedTasks(Request $request)
+    {
+        $tasks = $this->cardSwitcherService->latestTasks($request);
+
+        return response()->ok($tasks);
+    }
+
     public function store(CreateCardSwitcherRequest $request)
     {
         try {
