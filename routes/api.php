@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\CardSwitcherController;
 use App\Http\Controllers\MerchantController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,10 +33,12 @@ Route::prefix('v1')->group(function () {
         Route::prefix('cards')->group(function () {
             Route::post('', [CardController::class, 'store']);
         });
-    });
-
-    Route::prefix('merchants')->group(function () {
-        Route::get('', [MerchantController::class, 'index']);
+        Route::prefix('merchants')->group(function () {
+            Route::get('', [MerchantController::class, 'index']);
+        });
+        Route::prefix('card-switcher')->group(function () {
+            Route::post('', [CardSwitcherController::class, 'store']);
+        });
     });
 });
 
