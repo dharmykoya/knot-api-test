@@ -38,6 +38,7 @@ Route::prefix('v1')->group(function () {
         });
         Route::prefix('card-switcher')->group(function () {
             Route::post('', [CardSwitcherController::class, 'store']);
+            Route::put('{task_id}/status', [CardSwitcherController::class, 'updateTaskStatus']);
         });
     });
 });

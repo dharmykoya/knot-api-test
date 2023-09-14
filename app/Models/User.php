@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Card::class);
     }
+
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(CardSwitcherTask::class);
+    }
 }
