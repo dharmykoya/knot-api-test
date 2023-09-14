@@ -23,6 +23,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function () {
+    Route::get('', function (Request $request) {
+        return response()->json("Welcome to KnoxAPI TEST");
+    });
     Route::prefix('auth')->group(function () {
         Route::post('signup', [AuthController::class, 'signup']);
         Route::post('login', [AuthController::class, 'login']);
